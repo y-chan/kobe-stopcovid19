@@ -91,8 +91,7 @@ const config: Configuration = {
   buildModules: [
     '@nuxtjs/stylelint-module',
     '@nuxtjs/vuetify',
-    '@nuxt/typescript-build',
-    '@nuxtjs/google-analytics'
+    '@nuxt/typescript-build'
   ],
   /*
    ** Nuxt.js modules
@@ -116,9 +115,15 @@ const config: Configuration = {
       icons: false
     }
   },
-  googleAnalytics: {
-    id: 'UA-159417676-1'
-  },
+  optionalCookies: [
+    {
+      name: 'i18n_redirected',
+      label: 'i18n Redirection Cookie',
+      description:
+        'For automatically switching UI languages in accordance with locale preferences in the web browser configuration.',
+      cookies: ['i18n_redirected']
+    }
+  ],
   build: {
     plugins: [
       new webpack.ProvidePlugin({
@@ -171,9 +176,7 @@ const config: Configuration = {
         '/cards/number-of-reports-to-covid19-telephone-advisory-center',
         '/cards/number-of-reports-to-covid19-consultation-desk',
         /* '/cards/predicted-number-of-toei-subway-passengers',
-        '/cards/agency',
-        '/cards/shinjuku-visitors',
-        '/cards/chiyoda-visitors' */
+        '/cards/agency', */
         '/cards/number-of-reports-to-health-center-desk'
       ]
 

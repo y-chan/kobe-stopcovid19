@@ -51,21 +51,21 @@
 
     <div :class="[$style.SubtleBox, $style.Box2, $style.Center]">
       <div :class="$style.LargerText">
-        {{ $t('新型コロナコールセンター') }}
+        {{ $t('新型コロナ専用健康相談窓口') }}
       </div>
       <div :class="$style.SmallerText">
-        {{ $t('午前9時から午後9時（土日祝含む）') }}
+        {{ $t('24時間対応（土日祝含む）') }}
       </div>
 
       <div :class="$style.Tel">
-        <a :class="$style.TelLink" href="tel:0570550571">
+        <a :class="$style.TelLink" href="tel:0783226250">
           <img
             :class="$style.TelLinkIcon"
             src="/flow/phone-24px.svg"
             aria-hidden="true"
             :alt="$t('電話番号')"
           />
-          0570-550571
+          078-322-6250
         </a>
       </div>
     </div>
@@ -98,7 +98,9 @@
   &:focus {
     color: inherit;
     text-decoration: none;
-    outline: 1px dotted $gray-3;
+    @media screen {
+      outline: 1px dotted $gray-3;
+    }
   }
 
   &Icon {
@@ -212,6 +214,9 @@
 .LargerText {
   font-size: larger;
   font-weight: bold;
+  @media print {
+    width: 65%;
+  }
 }
 
 .Center {

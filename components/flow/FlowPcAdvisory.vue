@@ -17,46 +17,6 @@
             </span>
           </div>
         </div>
-      </div>
-
-      <div :class="$style.AdvisoryContents">
-        <div class="py-8">
-          <div :class="$style.AdvisoryContentsTitle2">
-            {{ $t('平日（日中）') }}
-          </div>
-          <div
-            :class="[
-              $style.AdvisoryLink,
-              $style.AdvisoryBlockCentering,
-              'mt-4'
-            ]"
-          >
-            <a
-              href="https://www.fukushihoken.metro.tokyo.lg.jp/iryo/kansen/coronasodan.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>{{ $t('各保健所の電話番号は福祉保健局HPへ') }}</span>
-              <v-icon size="18">
-                mdi-open-in-new
-              </v-icon>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div :class="$style.AdvisoryContents">
-        <div class="pt-8">
-          <div :class="$style.AdvisoryContentsTitle2">
-            {{ $t('平日（夜間）') }}
-          </div>
-          <span>{{ $t('午後5時から翌朝午前9時') }}</span>
-        </div>
-        <div class="mt-1">
-          <span :class="$style.AdvisoryContentsSubTitle">
-            {{ $t('土日祝 終日') }}
-          </span>
-        </div>
         <div
           :class="[
             $style.AdvisoryTelephoneArea,
@@ -64,18 +24,15 @@
             'mt-1'
           ]"
         >
-          <a :class="$style.AdvisoryTelephone" href="tel:0353204592">
+          <a :class="$style.AdvisoryTelephone" href="tel:0783226829">
             <img
               :class="$style.AdvisoryTelephoneIcon"
               src="/flow/phone-24px.svg"
               aria-hidden="true"
               :alt="$t('電話番号')"
             />
-            03-5320-4592
+            078-322-6829
           </a>
-        </div>
-        <div v-if="!['ja', 'ja-basic'].includes($i18n.locale)" class="pt-8">
-          <span>{{ $t('ひまわり') }}</span>
         </div>
       </div>
     </div>
@@ -92,6 +49,7 @@
 
   &Container {
     background-color: $gray-5;
+    border: 3px solid #4d4d4d;
     border-radius: 4px;
     height: 100%;
     padding: 30px 20px 20px 20px;
@@ -160,7 +118,10 @@
     &:focus {
       color: inherit;
       text-decoration: none;
-      outline: 1px dotted $gray-3;
+      @media screen {
+        // printだとoutlineが太くなってしまい読みにくいので、消す処理
+        outline: 1px dotted $gray-3;
+      }
     }
 
     &Icon {

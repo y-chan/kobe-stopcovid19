@@ -22,7 +22,7 @@
             <br />({{ $t('累計') }})
           </span>
           <span>
-            <strong>{{ 陽性者数 }}</strong>
+            <strong>{{ 陽性者数.toLocaleString() }}</strong>
             <span :class="$style.unit">{{ $t('人') }}</span>
           </span>
         </div>
@@ -33,7 +33,7 @@
             <div :class="$style.content">
               <span>{{ $t('入院中') }}</span>
               <span>
-                <strong>{{ 入院中 }}</strong>
+                <strong>{{ 入院中.toLocaleString() }}</strong>
                 <span :class="$style.unit">{{ $t('人') }}</span>
               </span>
             </div>
@@ -46,7 +46,7 @@
                   <span v-html="$t('軽症・<br />中等症')" />
                   <!-- eslint-enable vue/no-v-html-->
                   <span>
-                    <strong>{{ 軽症中等症 }}</strong>
+                    <strong>{{ 軽症中等症.toLocaleString() }}</strong>
                     <span :class="$style.unit">{{ $t('人') }}</span>
                   </span>
                 </div>
@@ -57,7 +57,7 @@
                 <div :class="$style.content">
                   <span>{{ $t('重症') }}</span>
                   <span>
-                    <strong>{{ 重症 }}</strong>
+                    <strong>{{ 重症.toLocaleString() }}</strong>
                     <span :class="$style.unit">{{ $t('人') }}</span>
                   </span>
                 </div>
@@ -70,7 +70,7 @@
             <div :class="$style.content">
               <span>{{ $t('死亡') }}</span>
               <span>
-                <strong>{{ 死亡 }}</strong>
+                <strong>{{ 死亡.toLocaleString() }}</strong>
                 <span :class="$style.unit">{{ $t('人') }}</span>
               </span>
             </div>
@@ -79,9 +79,23 @@
         <li :class="[$style.box, $style.recovered]">
           <div :class="$style.pillar">
             <div :class="$style.content">
-              <span>{{ $t('退院') }}</span>
+              <!-- disableした理由: 余計な空白を入れないようにHTMLを調整済み -->
+              <!-- eslint-disable prettier/prettier-->
               <span>
-                <strong>{{ 治癒確認 }}</strong>
+                {{ $t('治癒確認') }}
+                <br />(<i18n
+                  tag="span"
+                  :class="$style.recoveredText"
+                  path="{discharged}等"
+                >
+                  <template v-slot:discharged>
+                    <span :class="$style.recoveredTextLarger">{{ $t('退院') }}</span>
+                  </template>
+                </i18n>)
+              </span>
+              <!-- eslint-enable prettier/prettier-->
+              <span>
+                <strong>{{ 治癒確認.toLocaleString() }}</strong>
                 <span :class="$style.unit">{{ $t('人') }}</span>
               </span>
             </div>
@@ -318,6 +332,14 @@ $default-boxdiff: 35px;
   span.unit {
     @include font-size(16);
   }
+
+  .recoveredText {
+    @include font-size(12);
+
+    &Larger {
+      @include font-size(16);
+    }
+  }
 }
 
 @function px2vw($px, $vw: 0) {
@@ -350,6 +372,14 @@ $default-boxdiff: 35px;
 
     span.unit {
       @include font-size($fz);
+    }
+
+    .recoveredText {
+      @include font-size($fz - 4);
+
+      &Larger {
+        @include font-size($fz);
+      }
     }
   }
 
